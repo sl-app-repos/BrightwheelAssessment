@@ -1,26 +1,125 @@
 @import "tailwindcss";
 
+/* Typography: Inter is loaded from Google Fonts via next/font/google (see src/lib/fonts.ts).
+   No local .woff/.ttf files in this project. */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bw-primary: #0a7cff;
+  --bw-primary-hover: #006be6;
+  --bw-navy: #102a43;
+  --bw-body: #334e68;
+  --bw-muted: #627d98;
+  --bw-bg: #f7fbff;
+  --bw-card: #ffffff;
+  --bw-panel: #eaf5ff;
+  --bw-border: #d9eaf7;
+  --bw-success: #17b26a;
+  --bw-warning: #f79009;
+  --bw-error: #f04438;
+  --bw-yellow: #fff4cc;
+  --bw-teal: #dff7f3;
+  --bw-sidebar: #5b6fe5;
+  --bw-sidebar-dark: #4a5fd4;
+  --shadow-soft: 0 8px 24px rgba(16, 42, 67, 0.08),
+    0 2px 8px rgba(16, 42, 67, 0.06);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-bw-primary: #0a7cff;
+  --color-bw-primary-hover: #006be6;
+  --color-bw-navy: #102a43;
+  --color-bw-body: #334e68;
+  --color-bw-muted: #627d98;
+  --color-bw-bg: #f7fbff;
+  --color-bw-card: #ffffff;
+  --color-bw-panel: #eaf5ff;
+  --color-bw-border: #d9eaf7;
+  --color-bw-success: #17b26a;
+  --color-bw-warning: #f79009;
+  --color-bw-error: #f04438;
+  --color-bw-yellow: #fff4cc;
+  --color-bw-teal: #dff7f3;
+  --color-bw-sidebar: #5b6fe5;
+  --color-bw-sidebar-dark: #4a5fd4;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bw-card);
+  color: var(--bw-body);
+  /* font-family applied by inter.className from next/font/google on <body> */
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]),
+a[href],
+label[for],
+select,
+summary,
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+input[type="checkbox"],
+input[type="radio"] {
+  cursor: pointer;
+}
+
+button:disabled,
+[role="button"][aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+.shadow-bw {
+  box-shadow: var(--shadow-soft);
+}
+
+.text-hero {
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--bw-navy);
+  letter-spacing: -0.02em;
+}
+
+.text-section-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--bw-navy);
+  letter-spacing: -0.01em;
+}
+
+.text-card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--bw-navy);
+}
+
+.text-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--bw-muted);
+}
+
+.text-body {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--bw-body);
+}
+
+@media (min-width: 640px) {
+  .text-body {
+    font-size: 1.0625rem;
+  }
 }

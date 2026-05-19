@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BrightStart AI Front Desk
 
-## Getting Started
+A proof-of-concept web app for a Brightwheel-style **AI Front Desk** technical assessment. Guardians get fast, handbook-backed answers; operators manage the family handbook as the source of truth and improve it over time.
 
-First, run the development server:
+**Center:** Little Sprouts Learning Center (fictional)
+
+## Features
+
+- **Guardian Front Desk** — Quick question chips, chat UI, and answer cards powered by the family handbook
+- **Operator Control Center** — Metrics, **Guardian Question Trends** (category spikes, draft guardian reminders/updates, handbook improvements), 9 editable handbook sections (localStorage), recent questions, needs-review queue with suggested improvements, trust rules
+- **Simulated AI** — Deterministic keyword intent matching and handbook template responses (no LLM or external APIs)
+
+## Handbook sections
+
+Hours & Holidays, Health & Illness, Medication Administration, Authorized Pickup & Custody, Meals & Nutrition, Tuition & Billing, Tours & Enrollment, Guidance & Discipline, and Special Needs & Circumstances.
+
+## Run locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Access from another device on your network
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The dev server listens on all interfaces (`0.0.0.0`). From a phone or another computer on the same Wi‑Fi, use:
 
-## Learn More
+`http://<this-computer-ip>:3000`
 
-To learn more about Next.js, take a look at the following resources:
+(Find your IP with `ipconfig getifaddr en0` on macOS or `hostname -I` on Linux.)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+If you still see **Unauthorized**, restart the dev server after pulling latest config, or add your host explicitly:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+ALLOWED_DEV_ORIGINS=192.168.1.100 npm run dev
+```
 
-## Deploy on Vercel
+## Build
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run build
+npm start
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deploy to Vercel
+
+1. Push this repo to GitHub.
+2. Import the project in [Vercel](https://vercel.com).
+3. Use the default Next.js settings (no environment variables required).
+
+Or use the Vercel CLI:
+
+```bash
+npx vercel
+```
+
+## Tradeoffs
+
+| Choice | Why |
+|--------|-----|
+| Keyword intent matching | Reliable demos without API keys or latency |
+| Handbook templates + editable sections | Trustworthy, center-specific answers; operators improve the handbook over time |
+| `localStorage` v3 key | Includes seeded question history for trends demo; data is per-browser |
+| Guardian Question Trends | Surfaces repeated topics so operators act before the next interruption; proactive updates logged client-side |
+| Suggested improvements (rules-based) | Surfaces handbook gaps without ML or backend |
+| Single-page tabs | Simpler POC; use `#guardian` / `#operator` in the URL for tab deep links |
+
+## Prototype notice
+
+No real child or family data is used. All handbook content and conversations are fictional and stored only in the browser.
