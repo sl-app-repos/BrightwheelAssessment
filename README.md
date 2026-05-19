@@ -44,6 +44,10 @@ npm run build
 npm start
 ```
 
+## Deployment
+
+Production builds deploy automatically on push to `main` via Vercel.
+
 ## Deploy to Vercel
 
 1. Push this repo to GitHub.
